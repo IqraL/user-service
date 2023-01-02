@@ -23,13 +23,13 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const PORT = 3001;
+const PORT = 3002;
 
 app.get("/auth-link", async (req: AuthLinkRequest, res: AuthLinkResponse) =>
   generateAuthenticationLink({ res })
 );
 
-app.get("/signup", async (req: AuthRequest, res: AuthResponse) =>
+app.post("/login", async (req: AuthRequest, res: AuthResponse) =>
   loginOrSignUp({ req, res })
 );
 
@@ -41,6 +41,10 @@ app.get("/valid-token", (req: ValidJwtRequest, res: ValidJwtResponse) =>
 );
 
 app.get("/ping", (req, res) => {
+  res.send({ msg: "pong" });
+});
+
+app.post("/post_test", (req, res) => {
   res.send({ msg: "pong" });
 });
 

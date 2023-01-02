@@ -21,7 +21,8 @@ export const loginOrSignUp = async ({
   res: AuthResponse;
 }) => {
   try {
-    const { code } = req.query;
+    //@ts-ignore
+    const { code } = req.body;
 
     const tokens = await getGoogleTokens({
       authorizationCode: code,
