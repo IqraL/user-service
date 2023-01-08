@@ -33,7 +33,7 @@ app.post("/login", async (req: AuthRequest, res: AuthResponse) =>
   loginOrSignUp({ req, res })
 );
 
-app.get("/valid-token", (req: ValidJwtRequest, res: ValidJwtResponse) =>
+app.post("/valid-token", (req: ValidJwtRequest, res: ValidJwtResponse) =>
   validateToken({
     req,
     res,

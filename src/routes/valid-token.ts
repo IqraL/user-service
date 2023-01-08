@@ -8,16 +8,25 @@ export const validateToken = ({
   req: ValidJwtRequest;
   res: ValidJwtResponse;
 }) => {
-  const { token } = req.query;
+  const { token } = req.body;
 
   if (!token) {
     return res.send({
-      isValidJwt: false,
+      data: {
+        isValidJwt: false,
+      },
+      error: false,
+      success: true,
     });
   }
 
   const isTokenValid = verifyInternalJwt({ token });
+
   return res.send({
-    isValidJwt: isTokenValid,
+    data: {
+      isValidJwt: isTokenValid,
+    },
+    error: false,
+    success: true,
   });
 };

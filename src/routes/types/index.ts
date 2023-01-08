@@ -11,7 +11,7 @@ export type AuthLinkResponse = Response<
 type AuthLinkResponseSuccess = { authorizationUrl: string };
 type AuthLinkResponseError = ErrorResponseWrapper;
 
-export type AuthRequest = ExpressQueryRequest<{
+export type AuthRequest = ExpressPostRequest<{
   code: string;
 }>;
 export type AuthResponse = Response<
@@ -29,12 +29,13 @@ export type AuthResponseError = {
   authJourney: AuthJourney;
 };
 
-export type ValidJwtRequest = ExpressQueryRequest<{
-  email: string;
+export type ValidJwtRequest = ExpressPostRequest<{
   token: string;
 }>;
 
-export type ValidJwtResponse = Response<{ isValidJwt: boolean }>;
+export type ValidJwtResponse = Response<
+  SuccessResponseWrapper<{ isValidJwt: boolean }>
+>;
 
 export type SuccessResponseWrapper<T> = {
   success: true;
@@ -52,4 +53,4 @@ export type ErrorResponseWrapper<T = null> = {
 };
 
 export type ExpressRequest = Request<{}, {}, {}, {}>;
-export type ExpressQueryRequest<T = {}> = Request<{}, {}, {}, T>;
+export type ExpressPostRequest<T = {}> = Request<{}, {}, T, {}>;
