@@ -14,6 +14,7 @@ export const genInternalJWT = ({
         exp: Math.floor(Date.now() / 1000) + numberOfDays(30),
       },
       process.env.jwt_secret_key
+      //{ expiresIn: "1m" }
     );
   } catch (error) {
     throw new Error(

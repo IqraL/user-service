@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 
 const PORT = 3002;
 
-app.get("/auth-link", async (req: AuthLinkRequest, res: AuthLinkResponse) =>
+app.post("/auth-link", async (req: AuthLinkRequest, res: AuthLinkResponse) =>
   generateAuthenticationLink({ res })
 );
 
