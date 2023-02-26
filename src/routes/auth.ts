@@ -21,7 +21,7 @@ export const loginOrSignUp = async ({
   res: AuthResponse;
 }) => {
   try {
-    const { code } = req.body;
+    const { code, org } = req.body;
 
     const tokens = await getGoogleTokens({
       authorizationCode: code,
@@ -65,6 +65,13 @@ export const loginOrSignUp = async ({
       });
     }
 
+    // if user is deleted from db but was singed in they need to signout of the application/google account
+    if (!existingUser && !isGoogleAllTokensResponse(tokens)) {
+      throw new Error(
+        "You need to sign out first then sign back in as your session needs to close"
+      );
+    }
+
     if (!existingUser && isGoogleAllTokensResponse(tokens)) {
       const internalJWT = genInternalJWT({
         email: userData.email,
@@ -74,6 +81,7 @@ export const loginOrSignUp = async ({
       const insertUserData: UserData = {
         ...userData,
         ...tokens,
+        org,
         accountProvider: AccountProviders.google,
       };
 

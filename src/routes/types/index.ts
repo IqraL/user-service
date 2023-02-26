@@ -13,6 +13,7 @@ type AuthLinkResponseError = ErrorResponseWrapper;
 
 export type AuthRequest = ExpressPostRequest<{
   code: string;
+  org: string;
 }>;
 export type AuthResponse = Response<
   | SuccessResponseWrapper<AuthResponseSuccess>
