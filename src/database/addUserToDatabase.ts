@@ -1,16 +1,12 @@
+import { USERS_COLLECTION, USERS_DB } from "./config";
+import { getUserFromDB } from "./getUsers";
 import { MongoDbClient } from "./MongoDbClient";
 import { UserData, UserDataUpdateTokens } from "./types";
-import dotenv from "dotenv";
-
-dotenv.config();
-
-const USERS_DB = process.env.mongodb_database;
-const USERS_COLLECTION = process.env.mongodb_users_collection;
 
 export const addUserToDatabase = async (userData: UserData) => {
   const client = MongoDbClient.getClient();
 
-  const user = await getUser({ email: userData.email });
+  const user = await getUserFromDB({ email: userData.email });
 
   if (user) {
     throw new Error(
@@ -35,7 +31,7 @@ export const addUserToDatabase = async (userData: UserData) => {
 export const updateTokens = async (userData: UserDataUpdateTokens) => {
   const client = MongoDbClient.getClient();
 
-  const user = await getUser({ email: userData.email });
+  const user = await getUserFromDB({ email: userData.email });
 
   if (!user) {
     throw new Error("User does not exist");
@@ -53,15 +49,4 @@ export const updateTokens = async (userData: UserDataUpdateTokens) => {
     );
 
   console.log("updated user in database", userData);
-};
-
-export const getUser = async ({ email }: { email: string }) => {
-  const client = MongoDbClient.getClient();
-
-  const user = await client
-    .db(USERS_DB)
-    .collection(USERS_COLLECTION)
-    .findOne({ email });
-
-  return user;
 };

@@ -13,7 +13,7 @@ type AuthLinkResponseError = ErrorResponseWrapper;
 
 export type AuthRequest = ExpressPostRequest<{
   code: string;
-  org: string;
+  company: string;
 }>;
 export type AuthResponse = Response<
   | SuccessResponseWrapper<AuthResponseSuccess>
@@ -36,6 +36,18 @@ export type ValidJwtRequest = ExpressPostRequest<{
 
 export type ValidJwtResponse = Response<
   SuccessResponseWrapper<{ isValidJwt: boolean }>
+>;
+
+export type GetAllUsersRequest = ExpressPostRequest<{
+  company: string;
+}>;
+
+export type GetAllUsersResponseSuccess = {
+  usersProfiles: UserProfile[];
+};
+
+export type GetAllUsersResponse = Response<
+  SuccessResponseWrapper<GetAllUsersResponseSuccess> | ErrorResponseWrapper
 >;
 
 export type SuccessResponseWrapper<T> = {

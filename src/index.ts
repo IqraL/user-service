@@ -7,11 +7,14 @@ import {
   AuthLinkResponse,
   AuthRequest,
   AuthResponse,
+  GetAllUsersRequest,
+  GetAllUsersResponse,
   ValidJwtRequest,
   ValidJwtResponse,
 } from "./routes/types";
 import {
   generateAuthenticationLink,
+  getAllUsers,
   loginOrSignUp,
   validateToken,
 } from "./routes";
@@ -38,6 +41,12 @@ app.post("/valid-token", (req: ValidJwtRequest, res: ValidJwtResponse) =>
     req,
     res,
   })
+);
+
+app.post(
+  "/get-all-users",
+  async (req: GetAllUsersRequest, res: GetAllUsersResponse) =>
+    getAllUsers({ req, res })
 );
 
 app.get("/ping", (req, res) => {

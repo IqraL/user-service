@@ -3,7 +3,7 @@ import { GoogleUserData } from "../getGoogleUsersDetails/types";
 
 type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>;
 
-export type UserData = GoogleUser & {org: string}
+export type UserData = GoogleUser & {company: string}
 
 export type UserDataUpdateTokens = { email: string } & Optional<
   GoogleAllTokensResponse,

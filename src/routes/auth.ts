@@ -5,13 +5,13 @@ import { getGoogleUsersDetails } from "../getGoogleUsersDetails";
 
 import {
   addUserToDatabase,
-  getUser,
   updateTokens,
 } from "../database/addUserToDatabase";
 import { AccountProviders, UserData } from "../database/types";
 
 import { AuthJourney, AuthRequest, AuthResponse } from "./types";
 import { isGoogleEmailVerified } from "./helpers/auth";
+import { getUserFromDB } from "../database/getUsers";
 
 export const loginOrSignUp = async ({
   req,
@@ -21,7 +21,7 @@ export const loginOrSignUp = async ({
   res: AuthResponse;
 }) => {
   try {
-    const { code, org } = req.body;
+    const { code, company } = req.body;
 
     const tokens = await getGoogleTokens({
       authorizationCode: code,
@@ -42,7 +42,7 @@ export const loginOrSignUp = async ({
     const userData = await getGoogleUsersDetails({ access_token });
     console.log("userData", userData);
 
-    const existingUser = await getUser({ email: userData.email });
+    const existingUser = await getUserFromDB({ email: userData.email });
     console.log("existingUser", existingUser);
 
     if (existingUser) {
@@ -71,7 +71,7 @@ export const loginOrSignUp = async ({
         "You need to sign out first then sign back in as your session needs to close"
       );
     }
-
+    
     if (!existingUser && isGoogleAllTokensResponse(tokens)) {
       const internalJWT = genInternalJWT({
         email: userData.email,
@@ -81,7 +81,7 @@ export const loginOrSignUp = async ({
       const insertUserData: UserData = {
         ...userData,
         ...tokens,
-        org,
+        company,
         accountProvider: AccountProviders.google,
       };
 
