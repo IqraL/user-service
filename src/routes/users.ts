@@ -17,7 +17,7 @@ export const getAllUsers = async ({
       name: user.name,
       displayName: user.displayName,
       locales: user.locales,
-      googleSubId: user.googleSubId,
+      company: user.company,
     }));
 
     res.send({

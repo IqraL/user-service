@@ -3,5 +3,5 @@ export type UserProfile = {
   name: string;
   displayName: string;
   locales: string;
-  googleSubId: string;
+  company: string;
 };

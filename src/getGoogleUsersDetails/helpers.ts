@@ -14,6 +14,5 @@ export const extractUserData = (res: GoogleUsersDetailsResponse): GoogleUserData
     name: valueOrEmpty(res.names[0]?.unstructuredName),
     displayName: valueOrEmpty(res.names[0]?.displayName),
     locales: valueOrEmpty(res.locales[0]?.value),
-    googleSubId: valueOrEmpty(res.emailAddresses[0]?.metadata?.source?.id),
   };
 };

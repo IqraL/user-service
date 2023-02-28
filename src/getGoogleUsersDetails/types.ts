@@ -3,7 +3,6 @@ export type GoogleUserData = {
   name: string;
   displayName: string;
   locales: string;
-  googleSubId: string;
 };
 
 export type GoogleUsersDetailsResponse = {

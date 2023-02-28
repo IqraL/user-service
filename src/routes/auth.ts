@@ -3,15 +3,13 @@ import { genInternalJWT } from "../internalJwt";
 import { getGoogleTokens, isGoogleAllTokensResponse } from "../getGoogleTokens";
 import { getGoogleUsersDetails } from "../getGoogleUsersDetails";
 
-import {
-  addUserToDatabase,
-  updateTokens,
-} from "../database/addUserToDatabase";
+import { addUserToDatabase, updateTokens } from "../database/addUserToDatabase";
 import { AccountProviders, UserData } from "../database/types";
 
 import { AuthJourney, AuthRequest, AuthResponse } from "./types";
 import { isGoogleEmailVerified } from "./helpers/auth";
 import { getUserFromDB } from "../database/getUsers";
+import { UserProfile } from "../ui-types";
 
 export const loginOrSignUp = async ({
   req,
@@ -40,20 +38,21 @@ export const loginOrSignUp = async ({
     }
 
     const userData = await getGoogleUsersDetails({ access_token });
-    console.log("userData", userData);
+    const allUserData: UserProfile = {
+      ...userData,
+      company,
+    };
 
-    const existingUser = await getUserFromDB({ email: userData.email });
-    console.log("existingUser", existingUser);
+    const existingUser = await getUserFromDB({ email: allUserData.email });
 
     if (existingUser) {
       const internalJWT = genInternalJWT({
         email: existingUser.email,
         displayName: existingUser.displayName,
       });
-      console.log("internalJWT", internalJWT);
 
       await updateTokens({
-        email: userData.email,
+        email: allUserData.email,
         ...tokens,
         accountProvider: AccountProviders.google,
       });
@@ -61,7 +60,11 @@ export const loginOrSignUp = async ({
       return res.send({
         success: true,
         error: null,
-        data: { userData, jwt: internalJWT, authJourney: AuthJourney.login },
+        data: {
+          userData: allUserData,
+          jwt: internalJWT,
+          authJourney: AuthJourney.login,
+        },
       });
     }
 
@@ -71,17 +74,16 @@ export const loginOrSignUp = async ({
         "You need to sign out first then sign back in as your session needs to close"
       );
     }
-    
+
     if (!existingUser && isGoogleAllTokensResponse(tokens)) {
       const internalJWT = genInternalJWT({
-        email: userData.email,
-        displayName: userData.displayName,
+        email: allUserData.email,
+        displayName: allUserData.displayName,
       });
 
       const insertUserData: UserData = {
-        ...userData,
+        ...allUserData,
         ...tokens,
-        company,
         accountProvider: AccountProviders.google,
       };
 
@@ -90,7 +92,11 @@ export const loginOrSignUp = async ({
       return res.send({
         success: true,
         error: null,
-        data: { userData, jwt: internalJWT, authJourney: AuthJourney.signup },
+        data: {
+          userData: allUserData,
+          jwt: internalJWT,
+          authJourney: AuthJourney.signup,
+        },
       });
     }
 
