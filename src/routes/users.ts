@@ -1,5 +1,5 @@
 import { UserProfile } from "../ui-types";
-import { getAllUsersFromDB } from "../database/getUsers";
+import { getAllUsersFromDB } from "../database/users/getUsers";
 import { GetAllUsersRequest, GetAllUsersResponse } from "./types";
 
 export const getAllUsers = async ({

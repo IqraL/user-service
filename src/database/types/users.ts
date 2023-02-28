@@ -1,5 +1,5 @@
-import { GoogleAllTokensResponse } from "../getGoogleTokens/types";
-import { GoogleUserData } from "../getGoogleUsersDetails/types";
+import { GoogleAllTokensResponse } from "../../getGoogleTokens/types";
+import { GoogleUserData } from "../../getGoogleUsersDetails/types";
 
 type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>;
 

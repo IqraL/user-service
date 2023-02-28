@@ -1,7 +1,7 @@
-import { USERS_COLLECTION, USERS_DB } from "./config";
+import { USERS_COLLECTION, USERS_DB } from "../config";
 import { getUserFromDB } from "./getUsers";
-import { MongoDbClient } from "./MongoDbClient";
-import { UserData, UserDataUpdateTokens } from "./types";
+import { MongoDbClient } from "../MongoDbClient";
+import { UserData, UserDataUpdateTokens } from "../types/users";
 
 export const addUserToDatabase = async (userData: UserData) => {
   const client = MongoDbClient.getClient();

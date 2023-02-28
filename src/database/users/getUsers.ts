@@ -1,6 +1,6 @@
-import { USERS_COLLECTION, USERS_DB } from "./config";
-import { MongoDbClient } from "./MongoDbClient";
-import { UserData } from "./types";
+import { USERS_COLLECTION, USERS_DB } from "../config";
+import { MongoDbClient } from "../MongoDbClient";
+import { UserData } from "../types/users";
 
 export const getUserFromDB = async ({ email }: { email: string }) => {
   const client = MongoDbClient.getClient();

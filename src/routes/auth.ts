@@ -3,12 +3,12 @@ import { genInternalJWT } from "../internalJwt";
 import { getGoogleTokens, isGoogleAllTokensResponse } from "../getGoogleTokens";
 import { getGoogleUsersDetails } from "../getGoogleUsersDetails";
 
-import { addUserToDatabase, updateTokens } from "../database/addUserToDatabase";
-import { AccountProviders, UserData } from "../database/types";
+import { addUserToDatabase, updateTokens } from "../database/users/addUserToDatabase";
+import { AccountProviders, UserData } from "../database/types/users";
 
 import { AuthJourney, AuthRequest, AuthResponse } from "./types";
 import { isGoogleEmailVerified } from "./helpers/auth";
-import { getUserFromDB } from "../database/getUsers";
+import { getUserFromDB } from "../database/users/getUsers";
 import { UserProfile } from "../ui-types";
 
 export const loginOrSignUp = async ({
