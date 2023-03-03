@@ -1,11 +1,25 @@
 import { Request } from "express";
-import { UserGroup } from "../../ui-types";
-
+import { UserGroup } from "utils-and-types-for-development";
 
 type ExpressPostRequest<T> = Request<{}, {}, T, {}>;
 
+export type GetUserGroupById = {
+  id: string;
+};
+export type GetUserGroupByIdRequest = ExpressPostRequest<GetUserGroupById>;
+
+export type GetAllUserGroups = {
+  company: string;
+};
+export type GetAllUserGroupsRequest = ExpressPostRequest<GetAllUserGroups>;
+
 export type CreateUserGroup = { userGroup: UserGroup };
 export type CreateUserGroupRequest = ExpressPostRequest<CreateUserGroup>;
+
+
+export type DeleteUserGroup = { id: string };
+export type DeleteUserGroupRequest = ExpressPostRequest<DeleteUserGroup>;
+
 
 export type SearchUserGroups = {
   userGroupsName: string;
@@ -13,12 +27,3 @@ export type SearchUserGroups = {
 };
 export type SearchUserGroupsRequest = ExpressPostRequest<SearchUserGroups>;
 
-export type GetAllUserGroups = {
-  company: string;
-};
-export type GetAllUserGroupsRequest = ExpressPostRequest<GetAllUserGroups>;
-
-export type GetUserGroupById = {
-  id: string;
-};
-export type GetUserGroupByIdRequest = ExpressPostRequest<GetUserGroupById>;

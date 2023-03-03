@@ -1,7 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-
 import {
   AuthLinkRequest,
   AuthLinkResponse,
@@ -17,6 +16,7 @@ import {
   getAllUsers,
   loginOrSignUp,
   validateToken,
+  userGroupsRouter,
 } from "./routes";
 
 dotenv.config();
@@ -26,6 +26,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use(userGroupsRouter);
 const PORT = 3002;
 
 app.post("/auth-link", async (req: AuthLinkRequest, res: AuthLinkResponse) =>

@@ -1,92 +1,81 @@
-import { userGroupDBArgs } from "../config
-import {
-  addToMongo,
-  deleteFromMongo,
-  getFromMongo,
-} from "../../database/shared";
-import { MongoDbClient } from "../../database/MongoDbClient";
-import { UserGroup } from "../../ui-types";
+// import { userGroupDBArgs } from "../config";
+// import {
+//   addToMongo,
+//   deleteFromMongo,
+//   getAllFromMongo,
+//   getOneFromMongo,
+// } from "../../database/shared";
+// import { MongoDbClient } from "../../database/MongoDbClient";
+// import { UserGroup } from "utils-and-types-for-development";
+// import { SearchProperties } from "../../database/types";
 
-export const getUserGroupByIdDbWrapper = async ({ id }: { id: string }) =>
-  await getFromMongo<UserGroup>({
-    propId: { id },
-    ...userGroupDBArgs,
-  });
+// type P<T> = Partial<T>;
+// // type K =  UserGroup
+// export const getUserGroupByIdDbWrapper = async (
+//   searchProperties: SearchProperties<P<UserGroup>>
+// ) =>
+//   await getOneFromMongo<P<UserGroup>>({
+//     searchProperties,
+//     ...userGroupDBArgs,
+//   });
 
-export const getAllUserGroupsDbWrapper = async ({
-  company,
-}: {
-  company: string;
-}) => {
-  const client = MongoDbClient.getClient();
+// export const getAllUserGroupsDbWrapper = async (
+//   searchProperties: SearchProperties<Partial<UserGroup>>
+// ) =>
+//   await getAllFromMongo<UserGroup>({
+//     searchProperties,
+//     ...userGroupDBArgs,
+//   });
 
-  console.log("company", company);
+// export const searchUserGroupsDbWrapper = async ({
+//   userGroupsName,
+//   companyName,
+// }: {
+//   userGroupsName: string;
+//   companyName: string;
+// }) => {
+//   const client = MongoDbClient.getClient();
 
-  const cursor = await client
-    .db(userGroupDBArgs.db)
-    .collection(userGroupDBArgs.collection)
-    .find<UserGroup>({
-      company,
-    });
+//   const cursor = await client
+//     .db(userGroupDBArgs.db)
+//     .collection(userGroupDBArgs.collection)
+//     .find<UserGroup>({
+//       $and: [
+//         { company: companyName },
+//         { userGroupsName: { $regex: `.*${userGroupsName}*.`, $options: "i" } },
+//       ],
+//     });
 
-  const mongoDocuments: UserGroup[] = [];
+//   const mongoDocuments: UserGroup[] = [];
 
-  for await (const mongoDoc of cursor) {
-    console.log("mongoDoc", mongoDoc);
+//   for await (const mongoDoc of cursor) {
+//     mongoDocuments.push(mongoDoc);
+//   }
 
-    mongoDocuments.push(mongoDoc);
-  }
+//   return mongoDocuments;
+// };
 
-  return mongoDocuments;
-};
+// export const createUserGroupDbWrapper = async ({
+//   userGroup,
+// }: {
+//   userGroup: UserGroup;
+// }) => {
+//   await addToMongo<UserGroup>({
+//     obj: userGroup,
+//     ...userGroupDBArgs,
+//   });
 
-export const searchUserGroupsDbWrapper = async ({
-  userGroupsName,
-  companyName,
-}: {
-  userGroupsName: string;
-  companyName: string;
-}) => {
-  const client = MongoDbClient.getClient();
+//   const addedUserGroup = getUserGroupByIdDbWrapper({ id: userGroup.id });
 
-  const cursor = await client
-    .db(userGroupDBArgs.db)
-    .collection(userGroupDBArgs.collection)
-    .find<UserGroup>({
-      $and: [
-        { company: companyName },
-        { userGroupsName: { $regex: `.*${userGroupsName}*.`, $options: "i" } },
-      ],
-    });
+//   return addedUserGroup;
+// };
 
-  const mongoDocuments: UserGroup[] = [];
-
-  for await (const mongoDoc of cursor) {
-    mongoDocuments.push(mongoDoc);
-  }
-
-  return mongoDocuments;
-};
-
-export const createUserGroupDbWrapper = async ({
-  userGroup,
-}: {
-  userGroup: UserGroup;
-}) => {
-  await addToMongo<UserGroup>({
-    obj: userGroup,
-    ...userGroupDBArgs,
-  });
-
-  const addedUserGroup = getUserGroupByIdDbWrapper({ id: userGroup.id });
-
-  return addedUserGroup;
-};
-
-export const deleteUserGroupDbWrapper = async ({ id }: { id: string }) => {
-  await deleteFromMongo({
-    propId: { id },
-    findFunction: getUserGroupByIdDbWrapper,
-    ...userGroupDBArgs,
-  });
-};
+// export const deleteUserGroupDbWrapper = async <UserGroup>(
+//   searchProperties: SearchProperties<UserGroup>
+// ) => {
+//   await deleteFromMongo({
+//     searchProperties: searchProperties,
+//     findFunction: getUserGroupByIdDbWrapper,
+//     ...userGroupDBArgs,
+//   });
+// };
