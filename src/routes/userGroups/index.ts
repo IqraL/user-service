@@ -4,15 +4,21 @@ import { responseWrapper } from "../utils";
 import {
   addUsersToGroup,
   createUserGroup,
+  deleteUserGroup,
   getAllUserGroups,
   getUserGroupById,
+  removeUsersFromGroup,
+  searchUserGroups,
   // searchUserGroups,
 } from "./logic";
 import {
   AddUsersToGroupRequest,
   CreateUserGroupRequest,
+  DeleteUserGroupRequest,
   GetAllUserGroupsRequest,
   GetUserGroupByIdRequest,
+  RemoveUsersFromGroupRequest,
+  SearchUserGroupsRequest,
   // SearchUserGroupsRequest,
 } from "./types";
 // import { faker } from "@faker-js/faker";
@@ -37,22 +43,28 @@ userGroupsRouter.post(
     await responseWrapper<UserGroup>(createUserGroup(req), res)
 );
 
-
 userGroupsRouter.post(
   "/addUsersToGroup",
   async (req: AddUsersToGroupRequest, res) =>
     await responseWrapper<UserGroup>(addUsersToGroup(req), res)
 );
 
+userGroupsRouter.post(
+  "/removeUsersFromGroup",
+  async (req: RemoveUsersFromGroupRequest, res) =>
+    await responseWrapper<UserGroup>(removeUsersFromGroup(req), res)
+);
 
+userGroupsRouter.post(
+  "/deleteUserGroup",
+  async (req: DeleteUserGroupRequest, res) =>
+    await responseWrapper<void>(deleteUserGroup(req), res)
+);
 
-
-
-
-// userGroupsRouter.post(
-//   "/searchUserGroups",
-//   async (req: SearchUserGroupsRequest, res) =>
-//     await responseWrapper<UserGroup[]>(searchUserGroups(req), res)
-// );
+userGroupsRouter.post(
+  "/searchUserGroups",
+  async (req: SearchUserGroupsRequest, res) =>
+    await responseWrapper<UserGroup[]>(searchUserGroups(req), res)
+);
 
 export { userGroupsRouter };

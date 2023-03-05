@@ -1,9 +1,11 @@
-
 import {
+  AddUsersToGroupRequest,
   CreateUserGroupRequest,
   DeleteUserGroupRequest,
   GetAllUserGroupsRequest,
   GetUserGroupByIdRequest,
+  RemoveUsersFromGroupRequest,
+  SearchUserGroupsRequest,
 } from "../types";
 import {
   getOneDbItemWrapper,
@@ -14,6 +16,7 @@ import {
   ItemTypes,
   UserGroup,
   pushToArrayDbWrapper,
+  pullFromArrayDbWrapper,
 } from "utils-and-types-for-development";
 
 export const getUserGroupById =
@@ -38,6 +41,26 @@ export const createUserGroup =
     });
   };
 
+export const addUsersToGroup =
+  (req: AddUsersToGroupRequest) => async (): Promise<UserGroup> => {
+    return await pushToArrayDbWrapper<UserGroup>({
+      searchProperties: { id: req.body.id },
+      fieldAndValues: { users: req.body.users },
+      itemId: { id: req.body.id },
+      itemType: ItemTypes.UserGroups,
+    });
+  };
+
+export const removeUsersFromGroup =
+  (req: RemoveUsersFromGroupRequest) => async (): Promise<UserGroup> => {
+    return await pullFromArrayDbWrapper<UserGroup>({
+      searchProperties: { id: req.body.id },
+      fieldAndValues: { users: req.body.users },
+      itemId: { id: req.body.id },
+      itemType: ItemTypes.UserGroups,
+    });
+  };
+
 export const deleteUserGroup =
   (req: DeleteUserGroupRequest) => async (): Promise<void> => {
     return await deleteDbItemWrapper({
@@ -45,27 +68,19 @@ export const deleteUserGroup =
     });
   };
 
-export const addUsersToGroup = (req: any) => async (): Promise<UserGroup> => {
-  const currentUserGroup = await getOneDbItemWrapper<UserGroup>({
-    searchProperties: { id: req.body.id },
-    itemType: ItemTypes.UserGroups,
-  });
-
-  return await pushToArrayDbWrapper<UserGroup>({
-    searchProperties: { id: req.body.id },
-    fieldAndValues: { users: [...currentUserGroup.users, "newUser"] },
-    itemId: { id: req.body.id },
-    itemType: ItemTypes.UserGroups,
-  });
-};
-
 // pushToArrayDbWrapper;
 export const searchUserGroups =
-  (req: any) => async (): Promise<UserGroup[]> => {
+  (req: SearchUserGroupsRequest) => async (): Promise<UserGroup[]> => {
+    console.log({
+      name: req.body.name,
+      company: req.body.company,
+    });
     return await searchDbItemWrapper<UserGroup>({
       searchPropertiesAndValues: [
         {
-          name: req.body.userGroupsName,
+          name: req.body.name,
+        },
+        {
           company: req.body.company,
         },
       ],
