@@ -9,11 +9,13 @@ import {
   // searchUserGroups,
 } from "./logic";
 import {
+  AddUsersToGroupRequest,
   CreateUserGroupRequest,
   GetAllUserGroupsRequest,
   GetUserGroupByIdRequest,
   // SearchUserGroupsRequest,
 } from "./types";
+// import { faker } from "@faker-js/faker";
 
 const userGroupsRouter = express.Router();
 
@@ -38,9 +40,14 @@ userGroupsRouter.post(
 
 userGroupsRouter.post(
   "/addUsersToGroup",
-  async (req: any, res) =>
+  async (req: AddUsersToGroupRequest, res) =>
     await responseWrapper<UserGroup>(addUsersToGroup(req), res)
 );
+
+
+
+
+
 
 // userGroupsRouter.post(
 //   "/searchUserGroups",

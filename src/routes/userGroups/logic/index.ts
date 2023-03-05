@@ -1,16 +1,9 @@
-// import {
-//   searchUserGroupsDbWrapper,
-//   createUserGroupDbWrapper,
-//   getAllUserGroupsDbWrapper,
-//   getUserGroupByIdDbWrapper,
-// } from "../../../database/userGroups";
 
 import {
   CreateUserGroupRequest,
   DeleteUserGroupRequest,
   GetAllUserGroupsRequest,
   GetUserGroupByIdRequest,
-  // SearchUserGroupsRequest,
 } from "../types";
 import {
   getOneDbItemWrapper,
@@ -22,7 +15,6 @@ import {
   UserGroup,
   pushToArrayDbWrapper,
 } from "utils-and-types-for-development";
-import * as allTypes from "utils-and-types-for-development";
 
 export const getUserGroupById =
   (req: GetUserGroupByIdRequest) => async (): Promise<UserGroup> =>
@@ -54,18 +46,10 @@ export const deleteUserGroup =
   };
 
 export const addUsersToGroup = (req: any) => async (): Promise<UserGroup> => {
-  console.log("req", req.body);
-    console.log("ItemTypes", ItemTypes);
-        console.log("getOneDbItemWrapper", ItemTypes);
-
-
   const currentUserGroup = await getOneDbItemWrapper<UserGroup>({
     searchProperties: { id: req.body.id },
     itemType: ItemTypes.UserGroups,
   });
-
-    console.log("currentUserGroup", currentUserGroup);
-
 
   return await pushToArrayDbWrapper<UserGroup>({
     searchProperties: { id: req.body.id },
