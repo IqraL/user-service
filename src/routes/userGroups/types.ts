@@ -1,11 +1,10 @@
-import { Request } from "express";
 import {
   DatabaseOperationsParams,
   RegexProperties,
   UserGroup,
 } from "@midnight-moon/shared-types";
+import { ExpressPostRequest } from "../types";
 
-type ExpressPostRequest<T> = Request<{}, {}, T, {}>;
 
 export type GetUserGroupById = {
   id: string;

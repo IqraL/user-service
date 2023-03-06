@@ -13,6 +13,7 @@ export const genInternalJWT = ({
         data: { email, displayName },
         exp: Math.floor(Date.now() / 1000) + numberOfDays(30),
       },
+      //@ts-ignore
       process.env.jwt_secret_key
       //{ expiresIn: "1m" }
     );
@@ -25,6 +26,7 @@ export const genInternalJWT = ({
 
 export const verifyInternalJwt = ({ token }: { token: string }) => {
   try {
+    //@ts-ignore
     jwt.verify(token, process.env.jwt_secret_key);
     return true;
   } catch (error) {

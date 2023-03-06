@@ -13,7 +13,8 @@
   "license": "ISC",
   "dependencies": {
     "@midnight-moon/mongo-db-layer": "file:../npm-packages/mongo-db-layer",
-    "@midnight-moon/shared-types": "^0.0.3",
+    "@midnight-moon/shared-types": "file:../npm-packages/shared-types",
+    "@types/node": "^18.14.6",
     "axios": "^0.27.2",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",

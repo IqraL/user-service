@@ -26,11 +26,14 @@ export const responseWrapper = async <T>(
 ) => {
   try {
     const response = await fn();
+    //@ts-ignore
     res.send(successResponse(response ?? null));
   } catch (error) {
     res.send(
       errorResponse({
+        //@ts-ignore
         errorMsg: error.msg,
+        //@ts-ignore
         stack: error.stack,
       })
     );

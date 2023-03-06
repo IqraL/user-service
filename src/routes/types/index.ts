@@ -1,69 +1,9 @@
-import { UserProfile } from "@midnight-moon/shared-types";
-import { Request, Response } from "express";
-import { AuthJourney } from "./ui-types";
+import { Request } from "express";
 
-export { AuthJourney };
-
-export type AuthLinkRequest = ExpressRequest;
-export type AuthLinkResponse = Response<
-  SuccessResponseWrapper<AuthLinkResponseSuccess> | AuthLinkResponseError
->;
-type AuthLinkResponseSuccess = { authorizationUrl: string };
-type AuthLinkResponseError = ErrorResponseWrapper;
-
-export type AuthRequest = ExpressPostRequest<{
-  code: string;
-  company: string;
-}>;
-export type AuthResponse = Response<
-  | SuccessResponseWrapper<AuthResponseSuccess>
-  | ErrorResponseWrapper<AuthResponseError>
->;
-
-export type AuthResponseSuccess = {
-  userData: UserProfile;
-  jwt: string;
-  authJourney: AuthJourney;
-};
-
-export type AuthResponseError = {
-  authJourney: AuthJourney;
-};
-
-export type ValidJwtRequest = ExpressPostRequest<{
-  token: string;
-}>;
-
-export type ValidJwtResponse = Response<
-  SuccessResponseWrapper<{ isValidJwt: boolean }>
->;
-
-export type GetAllUsersRequest = ExpressPostRequest<{
-  company: string;
-}>;
-
-export type GetAllUsersResponseSuccess = {
-  usersProfiles: UserProfile[];
-};
-
-export type GetAllUsersResponse = Response<
-  SuccessResponseWrapper<GetAllUsersResponseSuccess> | ErrorResponseWrapper
->;
-
-export type SuccessResponseWrapper<T> = {
-  success: true;
-  error: false;
-  data: T;
-};
-
-export type ErrorResponseWrapper<T = null> = {
-  success: false;
-  error: {
-    message: string;
-    stack?: string;
-  };
-  metaData?: T;
-};
+export enum AuthJourney {
+  signup = "signup",
+  login = "login",
+}
 
 export type ExpressRequest = Request<{}, {}, {}, {}>;
 export type ExpressPostRequest<T = {}> = Request<{}, {}, T, {}>;

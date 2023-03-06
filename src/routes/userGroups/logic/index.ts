@@ -22,14 +22,14 @@ export const getUserGroupById =
   (req: GetUserGroupByIdRequest) => async (): Promise<UserGroup> =>
     await getOneDbItemWrapper<UserGroup>({
       searchProperties: { id: req.body.id },
-      itemType: ItemTypes.UserGroups,
+      itemType: ItemTypes.UserGroup,
     });
 
 export const getAllUserGroups =
   (req: GetAllUserGroupsRequest) => async (): Promise<UserGroup[]> => {
     return await getAllDbItemsWrapper<UserGroup>({
       searchProperties: { company: req.body.company },
-      itemType: ItemTypes.UserGroups,
+      itemType: ItemTypes.UserGroup,
     });
   };
 
@@ -46,7 +46,7 @@ export const addUsersToGroup =
       searchProperties: { id: req.body.id },
       fieldAndValues: { users: req.body.users },
       itemId: { id: req.body.id },
-      itemType: ItemTypes.UserGroups,
+      itemType: ItemTypes.UserGroup,
     });
   };
 
@@ -56,7 +56,7 @@ export const removeUsersFromGroup =
       searchProperties: { id: req.body.id },
       fieldAndValues: { users: req.body.users },
       itemId: { id: req.body.id },
-      itemType: ItemTypes.UserGroups,
+      itemType: ItemTypes.UserGroup,
     });
   };
 
@@ -74,6 +74,6 @@ export const searchUserGroups =
       searchPropertiesAndValues: [{ ...req.body.searchPropertiesAndValues }],
       regexProperties: [...req.body.regexProperties],
       searchType: req.body.searchType,
-      itemType: ItemTypes.UserGroups,
+      itemType: ItemTypes.UserGroup,
     });
   };
