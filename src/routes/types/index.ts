@@ -1,4 +1,4 @@
-import { UserProfile } from "../../ui-types";
+import { UserProfile } from "@midnight-moon/shared-types";
 import { Request, Response } from "express";
 import { AuthJourney } from "./ui-types";
 

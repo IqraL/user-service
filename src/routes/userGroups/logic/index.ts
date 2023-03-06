@@ -7,17 +7,16 @@ import {
   RemoveUsersFromGroupRequest,
   SearchUserGroupsRequest,
 } from "../types";
+import { ItemTypes, UserGroup } from "@midnight-moon/shared-types";
 import {
   getOneDbItemWrapper,
   getAllDbItemsWrapper,
   createDbItemWrapper,
   deleteDbItemWrapper,
   searchDbItemWrapper,
-  ItemTypes,
-  UserGroup,
   pushToArrayDbWrapper,
   pullFromArrayDbWrapper,
-} from "utils-and-types-for-development";
+} from "@midnight-moon/mongo-db-layer";
 
 export const getUserGroupById =
   (req: GetUserGroupByIdRequest) => async (): Promise<UserGroup> =>
@@ -71,21 +70,10 @@ export const deleteUserGroup =
 // pushToArrayDbWrapper;
 export const searchUserGroups =
   (req: SearchUserGroupsRequest) => async (): Promise<UserGroup[]> => {
-    console.log({
-      name: req.body.name,
-      company: req.body.company,
-    });
     return await searchDbItemWrapper<UserGroup>({
-      searchPropertiesAndValues: [
-        {
-          name: req.body.name,
-        },
-        {
-          company: req.body.company,
-        },
-      ],
-      regexProperties: ["name"],
-      searchType: "and",
+      searchPropertiesAndValues: [{ ...req.body.searchPropertiesAndValues }],
+      regexProperties: [...req.body.regexProperties],
+      searchType: req.body.searchType,
       itemType: ItemTypes.UserGroups,
     });
   };

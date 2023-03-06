@@ -1,5 +1,9 @@
 import { Request } from "express";
-import { UserGroup } from "utils-and-types-for-development";
+import {
+  DatabaseOperationsParams,
+  RegexProperties,
+  UserGroup,
+} from "@midnight-moon/shared-types";
 
 type ExpressPostRequest<T> = Request<{}, {}, T, {}>;
 
@@ -20,13 +24,16 @@ export type AddUsersToGroup = { id: string; users: string[] };
 export type AddUsersToGroupRequest = ExpressPostRequest<AddUsersToGroup>;
 
 export type RemoveUsersFromGroup = { id: string; users: string[] };
-export type RemoveUsersFromGroupRequest = ExpressPostRequest<RemoveUsersFromGroup>;
+export type RemoveUsersFromGroupRequest =
+  ExpressPostRequest<RemoveUsersFromGroup>;
 
 export type DeleteUserGroup = { id: string };
 export type DeleteUserGroupRequest = ExpressPostRequest<DeleteUserGroup>;
 
+//TDDO: make sure user only get results for company
 export type SearchUserGroups = {
-  name: string;
-  company: string;
+  searchPropertiesAndValues: DatabaseOperationsParams.SearchProperties<UserGroup>;
+  regexProperties: RegexProperties<UserGroup>;
+  searchType: "and" | "or";
 };
 export type SearchUserGroupsRequest = ExpressPostRequest<SearchUserGroups>;

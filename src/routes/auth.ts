@@ -9,7 +9,7 @@ import { AccountProviders, UserData } from "../database/types/users";
 import { AuthJourney, AuthRequest, AuthResponse } from "./types";
 import { isGoogleEmailVerified } from "./helpers/auth";
 import { getUserFromDB } from "../database/users/getUsers";
-import { UserProfile } from "../ui-types";
+import { ItemTypes, UserProfile } from "@midnight-moon/shared-types";
 
 export const loginOrSignUp = async ({
   req,
@@ -41,6 +41,7 @@ export const loginOrSignUp = async ({
     const allUserData: UserProfile = {
       ...userData,
       company,
+      itemType: ItemTypes.Users
     };
 
     const existingUser = await getUserFromDB({ email: allUserData.email });
