@@ -1,5 +1,5 @@
 import { UserProfile } from "@midnight-moon/shared-types";
-import { AuthJourney, ExpressPostRequest, ExpressRequest } from "../types";
+import { AuthJourney, ExpressPostRequest, ExpressRequest } from "../helpers/types";
 
 export type AuthRequest = ExpressPostRequest<{
   code: string;

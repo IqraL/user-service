@@ -10,7 +10,7 @@ import {
 
 import { loginOrSignUp } from "./logic/auth";
 import { generateAuthenticationLink } from "./logic/auth-link";
-import { responseWrapper } from "../utils";
+import { responseWrapper } from "../helpers/utils";
 import { validateToken } from "./logic/valid-token";
 
 const authenticationRouter = express.Router();

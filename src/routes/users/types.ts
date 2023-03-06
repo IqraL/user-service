@@ -1,7 +1,7 @@
 import { GoogleAllTokensResponse } from "../../getGoogleTokens/types";
 import { GoogleUserData } from "../../getGoogleUsersDetails/types";
 import { AccountProviders, UserProfile } from "@midnight-moon/shared-types";
-import { ExpressPostRequest } from "../types";
+import { ExpressPostRequest } from "../helpers/types";
 
 type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>;
 

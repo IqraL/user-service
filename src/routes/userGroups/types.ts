@@ -3,7 +3,7 @@ import {
   RegexProperties,
   UserGroup,
 } from "@midnight-moon/shared-types";
-import { ExpressPostRequest } from "../types";
+import { ExpressPostRequest } from "../helpers/types";
 
 
 export type GetUserGroupById = {

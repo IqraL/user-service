@@ -10,7 +10,7 @@ import {
   // GetAllUsersResponse,
   // ValidJwtRequest,
   // ValidJwtResponse,
-} from "./routes/types";
+} from "./routes/helpers/types";
 import {
   // generateAuthenticationLink,
   // getAllUsers,

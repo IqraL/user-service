@@ -1,5 +1,5 @@
 import express from "express";
-import { responseWrapper } from "../utils";
+import { responseWrapper } from "../helpers/utils";
 import { getUserById } from "./logic";
 import { GetUserByIdRequest, GetUserByIdSuccess } from "./types";
 

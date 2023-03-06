@@ -1,6 +1,6 @@
 import express from "express";
 import { UserGroup } from "@midnight-moon/shared-types";
-import { responseWrapper } from "../utils";
+import { responseWrapper } from "../helpers/utils";
 import {
   addUsersToGroup,
   createUserGroup,

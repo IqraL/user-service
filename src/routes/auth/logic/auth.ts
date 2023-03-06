@@ -20,7 +20,7 @@ import {
   UserData,
   // AuthJourney,
 } from "@midnight-moon/shared-types";
-import { AuthJourney } from "../../types";
+import { AuthJourney } from "../../helpers/types";
 import { createDbItemWrapper, getOneDbItemWrapper, updateDbItemWrapper } from "@midnight-moon/mongo-db-layer";
 // import { UserDataUpdateTokens } from "../..//users/types";
 
