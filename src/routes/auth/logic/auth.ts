@@ -6,11 +6,6 @@ import {
 } from "../../../getGoogleTokens";
 import { getGoogleUsersDetails } from "../../../getGoogleUsersDetails";
 
-// import {
-//   addUserToDatabase,
-//   updateTokens,
-// } from "../../../database/users/addUserToDatabase";
-
 import { AuthRequest, AuthResponseSuccess } from "../types";
 import { isGoogleEmailVerified } from "../../helpers/auth";
 import {
@@ -18,34 +13,13 @@ import {
   UserProfile,
   AccountProviders,
   UserData,
-  // AuthJourney,
 } from "@midnight-moon/shared-types";
 import { AuthJourney } from "../../helpers/types";
-import { createDbItemWrapper, getOneDbItemWrapper, updateDbItemWrapper } from "@midnight-moon/mongo-db-layer";
-// import { UserDataUpdateTokens } from "../..//users/types";
-
-// export const updateTokens = async (userData: UserDataUpdateTokens) => {
-//   const client = MongoDbClient.getClient();
-
-//   const user = await getUserFromDB({ email: userData.email });
-
-//   if (!user) {
-//     throw new Error("User does not exist");
-//   }
-
-//   await client
-//     .db(USERS_DB)
-//     .collection(USERS_COLLECTION)
-//     .updateOne(
-//       { email: userData.email },
-//       {
-//         $set: { ...userData, lastLoggedIn: new Date() },
-//         $currentDate: { lastModified: true },
-//       }
-//     );
-
-//   console.log("updated user in database", userData);
-// };
+import {
+  createDbItemWrapper,
+  getOneDbItemWrapper,
+  updateDbItemWrapper,
+} from "@midnight-moon/mongo-db-layer";
 
 export const loginOrSignUp =
   (req: AuthRequest) => async (): Promise<AuthResponseSuccess> => {
@@ -69,14 +43,9 @@ export const loginOrSignUp =
       }
 
       const userData = await getGoogleUsersDetails({ access_token });
-      const allUserData: UserProfile = {
-        ...userData,
-        company,
-        itemType: ItemTypes.User,
-      };
 
       const existingUser = await getOneDbItemWrapper<UserData>({
-        searchProperties: { email: allUserData.email },
+        searchProperties: { email: userData.email },
         itemType: ItemTypes.User,
       });
 
@@ -87,17 +56,12 @@ export const loginOrSignUp =
         });
 
         await updateDbItemWrapper({
-          itemId: { email: allUserData.email },
+          itemId: { email: existingUser.email },
           item: { ...tokens },
         });
-        // await updateTokens({
-        //   email: allUserData.email,
-        //   ...tokens,
-        //   accountProvider: AccountProviders.google,
-        // });
 
         return {
-          userData: allUserData,
+          userData: existingUser,
           jwt: internalJWT,
           authJourney: AuthJourney.login,
         };
@@ -110,7 +74,13 @@ export const loginOrSignUp =
         );
       }
 
-      if (!existingUser && isGoogleAllTokensResponse(tokens)) {
+      if (!existingUser && isGoogleAllTokensResponse(tokens) && company) {
+        const allUserData: UserProfile = {
+          ...userData,
+          company,
+          itemType: ItemTypes.User,
+        };
+
         const internalJWT = genInternalJWT({
           email: allUserData.email,
           displayName: allUserData.displayName,
@@ -127,7 +97,6 @@ export const loginOrSignUp =
         await createDbItemWrapper({
           item: insertUserData,
         });
-        // await addUserToDatabase(insertUserData);
 
         return {
           userData: allUserData,

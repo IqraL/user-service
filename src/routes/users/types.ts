@@ -23,3 +23,9 @@ export type GetUserByIdRequest = ExpressPostRequest<{
 }>;
 
 export type GetUserByIdSuccess = UserProfile;
+
+export type GetAllUserRequest = ExpressPostRequest<{
+  company: string;
+}>;
+
+export type GetAllUserSuccess = UserProfile[]

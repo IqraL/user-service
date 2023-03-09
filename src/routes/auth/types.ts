@@ -3,7 +3,7 @@ import { AuthJourney, ExpressPostRequest, ExpressRequest } from "../helpers/type
 
 export type AuthRequest = ExpressPostRequest<{
   code: string;
-  company: string;
+  company?: string;
 }>;
 
 export type AuthResponseSuccess = {

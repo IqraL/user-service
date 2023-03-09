@@ -1,7 +1,7 @@
 import express from "express";
 import { responseWrapper } from "../helpers/utils";
-import { getUserById } from "./logic";
-import { GetUserByIdRequest, GetUserByIdSuccess } from "./types";
+import { getAllUsers, getUserById } from "./logic";
+import { GetAllUserRequest, GetAllUserSuccess, GetUserByIdRequest, GetUserByIdSuccess } from "./types";
 
 const usersRouter = express.Router();
 
@@ -11,4 +11,10 @@ usersRouter.post(
     await responseWrapper<GetUserByIdSuccess>(getUserById(req), res)
 );
 
+
+usersRouter.post(
+  "/get-all-users",
+  async (req: GetAllUserRequest, res) =>
+    await responseWrapper<GetAllUserSuccess>(getAllUsers(req), res)
+);
 export { usersRouter };
