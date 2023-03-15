@@ -8,10 +8,11 @@ const userDataToProfile = (user: UserData): UserProfile => ({
   displayName: user.displayName,
   locales: user.locales,
   company: user.company,
+  userGroups:user.userGroups,
   itemType: ItemTypes.User,
 });
 export const getUserById =
-  (req: GetUserByIdRequest) => async (): Promise<UserProfile> => {
+  (req: GetUserByIdRequest) => async (): Promise<UserProfile> => { 
     const user = await getOneDbItemWrapper<UserData>({
       searchProperties: { email: req.body.email },
       itemType: ItemTypes.User,

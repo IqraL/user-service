@@ -78,6 +78,7 @@ export const loginOrSignUp =
         const allUserData: UserProfile = {
           ...userData,
           company,
+          userGroups:[],
           itemType: ItemTypes.User,
         };
 

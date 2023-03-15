@@ -26,43 +26,43 @@ import {
 const userGroupsRouter = express.Router();
 
 userGroupsRouter.post(
-  "/getUserGroupById",
+  "/get-user-group-by-id",
   async (req: GetUserGroupByIdRequest, res) =>
     await responseWrapper<UserGroup>(getUserGroupById(req), res)
 );
 
 userGroupsRouter.post(
-  "/getAllUserGroups",
+  "/get-all-user-groups",
   async (req: GetAllUserGroupsRequest, res) =>
     await responseWrapper<UserGroup[]>(getAllUserGroups(req), res)
 );
 
 userGroupsRouter.post(
-  "/createUserGroup",
+  "/create-user-group",
   async (req: CreateUserGroupRequest, res) =>
     await responseWrapper<UserGroup>(createUserGroup(req), res)
 );
 
 userGroupsRouter.post(
-  "/addUsersToGroup",
+  "/add-users-to-group",
   async (req: AddUsersToGroupRequest, res) =>
     await responseWrapper<UserGroup>(addUsersToGroup(req), res)
 );
 
 userGroupsRouter.post(
-  "/removeUsersFromGroup",
+  "/remove-users-from-group",
   async (req: RemoveUsersFromGroupRequest, res) =>
     await responseWrapper<UserGroup>(removeUsersFromGroup(req), res)
 );
 
 userGroupsRouter.post(
-  "/deleteUserGroup",
+  "/delete-user-group",
   async (req: DeleteUserGroupRequest, res) =>
     await responseWrapper<void>(deleteUserGroup(req), res)
 );
 
 userGroupsRouter.post(
-  "/searchUserGroups",
+  "/search-user-groups",
   async (req: SearchUserGroupsRequest, res) =>
     await responseWrapper<UserGroup[]>(searchUserGroups(req), res)
 );
