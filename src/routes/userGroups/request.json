@@ -1,0 +1,172 @@
+{
+  "info": {
+    "_postman_id": "7c87d8fb-8b9c-41a2-888f-74377f835dc7",
+    "name": "User Groups API",
+    "description": "API for managing user groups.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get User Group By ID",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"id\": \"\"\n}"
+        },
+        "url": {
+          "raw": "{{USER_SERVICE}}/get-user-group-by-id",
+          "host": ["{{USER_SERVICE}}"],
+          "path": ["get-user-group-by-id"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All User Groups",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"company\": \"\"\n}"
+        },
+        "url": {
+          "raw": "{{USER_SERVICE}}/get-all-user-groups",
+          "host": ["{{USER_SERVICE}}"],
+          "path": ["get-all-user-groups"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create User Group",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"userGroup\": {\n        \n    }\n}"
+        },
+        "url": {
+          "raw": "{{USER_SERVICE}}/create-user-group",
+          "host": ["{{USER_SERVICE}}"],
+          "path": ["create-user-group"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add Users to Group",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"id\": \"\",\n    \"users\": []\n}"
+        },
+        "url": {
+          "raw": "{{USER_SERVICE}}/add-users-to-group",
+          "host": ["{{USER_SERVICE}}"],
+          "path": ["add-users-to-group"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Remove Users from Group",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"id\": \"\", \"users\": []}"
+        },
+        "url": {
+          "raw": "{{USER_SERVICE}}/remove-users-from-group",
+          "host": ["{{USER_SERVICE}}"],
+          "path": ["remove-users-from-group"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete User Group",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"id\": \"\" \n}"
+        },
+        "url": {
+          "raw": "{{USER_SERVICE}}/delete-user-group",
+          "host": ["{{USER_SERVICE}}"],
+          "path": ["delete-user-group"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Search User Groups",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n \"searchPropertiesAndValues\": {},\n \"regexProperties\": [],\n \"searchType\": \"\" \n}"
+        },
+        "url": {
+          "raw": "{{USER_SERVICE}}/search-user-groups",
+          "host": ["{{USER_SERVICE}}"],
+          "path": ["search-user-groups"]
+        }
+      },
+      "response": []
+    }
+  ],
+  "protocolProfileBehavior": {}
+}

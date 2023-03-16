@@ -1,5 +1,14 @@
 import express from "express";
-import { UserGroup } from "@midnight-moon/shared-types";
+import {
+  UserGroup,
+  AddUsersToGroupRequest,
+  CreateUserGroupRequest,
+  DeleteUserGroupRequest,
+  GetAllUserGroupsRequest,
+  GetUserGroupByIdRequest,
+  RemoveUsersFromGroupRequest,
+  SearchUserGroupsRequest,
+} from "@midnight-moon/shared-types";
 import { responseWrapper } from "../helpers/utils";
 import {
   addUsersToGroup,
@@ -9,19 +18,7 @@ import {
   getUserGroupById,
   removeUsersFromGroup,
   searchUserGroups,
-  // searchUserGroups,
 } from "./logic";
-import {
-  AddUsersToGroupRequest,
-  CreateUserGroupRequest,
-  DeleteUserGroupRequest,
-  GetAllUserGroupsRequest,
-  GetUserGroupByIdRequest,
-  RemoveUsersFromGroupRequest,
-  SearchUserGroupsRequest,
-  // SearchUserGroupsRequest,
-} from "./types";
-// import { faker } from "@faker-js/faker";
 
 const userGroupsRouter = express.Router();
 

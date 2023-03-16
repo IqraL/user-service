@@ -1,4 +1,6 @@
 import {
+  ItemTypes,
+  UserGroup,
   AddUsersToGroupRequest,
   CreateUserGroupRequest,
   DeleteUserGroupRequest,
@@ -6,8 +8,7 @@ import {
   GetUserGroupByIdRequest,
   RemoveUsersFromGroupRequest,
   SearchUserGroupsRequest,
-} from "../types";
-import { ItemTypes, UserGroup } from "@midnight-moon/shared-types";
+} from "@midnight-moon/shared-types";
 import {
   getOneDbItemWrapper,
   getAllDbItemsWrapper,
