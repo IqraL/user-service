@@ -1,0 +1,53 @@
+import { SendValidationEmailRequest } from "../types";
+import { v4 as uuidv4 } from "uuid";
+import { mg } from "../config";
+import {
+  createDbItemWrapper,
+  getOneDbItemWrapper,
+  updateDbItemWrapper,
+} from "@midnight-moon/mongo-db-layer";
+import { EmailValidation, ItemTypes } from "@midnight-moon/shared-types";
+
+export const sendValidationEmail =
+  (req: SendValidationEmailRequest) => async () => {
+    try {
+      const { email } = req.body;
+      const code = uuidv4();
+
+      const alreadySentCode = await getOneDbItemWrapper<EmailValidation>({
+        searchProperties: {
+          email,
+        },
+        itemType: ItemTypes.EmailValidation,
+      });
+
+      if (!alreadySentCode) {
+        await createDbItemWrapper<EmailValidation>({
+          item: {
+            emailValidationId: uuidv4(),
+            email: email,
+            validationCode: code,
+            itemType: ItemTypes.EmailValidation,
+          },
+        });
+      }else{
+        await updateDbItemWrapper<EmailValidation>({
+          item: { ...alreadySentCode, validationCode: code },
+          itemId: {
+            emailValidationId: alreadySentCode.emailValidationId
+          },
+        });
+      }
+
+      const data = {
+        from: '"App_Name" <iqralatif159@gmail.com>',
+        to: email,
+        subject: "Email validation code",
+        text: `Your email validation code is ${code}. Please enter this code to validate your email address.`,
+      };
+
+      await mg.messages().send(data);
+    } catch (error) {
+      throw new Error("Failed to send email validation code.");
+    }
+  };

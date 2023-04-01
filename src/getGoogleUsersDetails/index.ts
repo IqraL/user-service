@@ -14,12 +14,15 @@ export const getGoogleUsersDetails = async ({
   try {
     const config = {
       method: "get",
-      url: `${process.env.google_auth_user_profile_url}?personFields=emailAddresses%2Cnames%2Clocales&sources=READ_SOURCE_TYPE_PROFILE&access_token=${access_token}`,
+      url: `${process.env.google_auth_user_profile_url}?personFields=emailAddresses%2Cnames%2Clocales%2Corganizations&sources=READ_SOURCE_TYPE_PROFILE&access_token=${access_token}`,
     };
 
     const response: AxiosResponse<GoogleUsersDetailsResponse> = await axios(
       config
     );
+
+    console.log("response", response.data);
+    console.log("response", response.data.emailAddresses[0].metadata);
 
     return extractUserData(response.data);
   } catch (error) {

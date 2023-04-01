@@ -1,7 +1,12 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import { usersRouter, userGroupsRouter, authenticationRouter } from "./routes";
+import {
+  usersRouter,
+  userGroupsRouter,
+  authenticationRouter,
+  companiesRouter,
+} from "./routes";
 
 dotenv.config();
 
@@ -20,6 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(authenticationRouter);
 app.use(usersRouter);
 app.use(userGroupsRouter);
+app.use(companiesRouter);
 
 const PORT = 3002;
 
