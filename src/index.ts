@@ -6,6 +6,7 @@ import {
   userGroupsRouter,
   authenticationRouter,
   companiesRouter,
+  emailsRouter,
 } from "./routes";
 
 dotenv.config();
@@ -26,6 +27,7 @@ app.use(authenticationRouter);
 app.use(usersRouter);
 app.use(userGroupsRouter);
 app.use(companiesRouter);
+app.use(emailsRouter);
 
 const PORT = 3002;
 

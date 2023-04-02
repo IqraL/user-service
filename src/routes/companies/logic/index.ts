@@ -21,6 +21,6 @@ export const searchCompanies =
       searchPropertiesAndValues: [{ ...req.body.searchPropertiesAndValues }],
       regexProperties: [...req.body.regexProperties],
       searchType: req.body.searchType,
-      itemType: ItemTypes.UserGroup,
+      itemType: ItemTypes.CompanyDetails,
     });
   };
