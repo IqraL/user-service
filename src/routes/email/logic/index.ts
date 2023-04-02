@@ -1,4 +1,4 @@
-import { SendValidationEmailRequest } from "../types";
+import { SendValidationEmailRequest, ValidationEmailRequest } from "../types";
 import { v4 as uuidv4 } from "uuid";
 import { mg } from "../config";
 import {
@@ -49,5 +49,27 @@ export const sendValidationEmail =
       await mg.messages().send(data);
     } catch (error) {
       throw new Error("Failed to send email validation code.");
+    }
+  };
+
+  export const validateEmail = (req: ValidationEmailRequest) => async () => {
+    try {
+      const { code , email} = req.body;
+
+      const exists = await getOneDbItemWrapper<EmailValidation>({
+        searchProperties: {
+          email,
+          validationCode: code,
+        },
+        itemType: ItemTypes.EmailValidation,
+      });
+
+      if (!exists){
+        throw new Error('Incorrect Code, resend and try again');
+      }
+
+     return true;
+    } catch (error) {
+        throw new Error("Incorrect Code, resend and try again");
     }
   };
