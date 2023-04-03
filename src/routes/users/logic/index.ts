@@ -7,8 +7,9 @@ const userDataToProfile = (user: UserData): UserProfile => ({
   name: user.name,
   displayName: user.displayName,
   locales: user.locales,
-  company: user.company,
+  companyId: user.companyId,
   userGroups:user.userGroups,
+  isAdmin: user.isAdmin,
   itemType: ItemTypes.User,
 });
 export const getUserById =
@@ -24,7 +25,7 @@ export const getUserById =
 export const getAllUsers =
   (req: GetAllUserRequest) => async (): Promise<UserProfile[]> => {
     const users = await getAllDbItemsWrapper<UserData>({
-      searchProperties: { company: req.body.company },
+      searchProperties: { companyId: req.body.companyId },
       itemType: ItemTypes.User,
     });
 

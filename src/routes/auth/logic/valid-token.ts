@@ -1,5 +1,5 @@
 import { verifyInternalJwt } from "../../../internalJwt";
-import { ValidJwtRequest, ValidJwtSuccess } from "../types";
+import { ValidJwtRequest, ValidJwtSuccess } from "@midnight-moon/shared-types";
 
 export const validateToken =
   (req: ValidJwtRequest) => async (): Promise<ValidJwtSuccess> => {

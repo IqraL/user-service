@@ -25,7 +25,7 @@ export type GetUserByIdRequest = ExpressPostRequest<{
 export type GetUserByIdSuccess = UserProfile;
 
 export type GetAllUserRequest = ExpressPostRequest<{
-  company: string;
+  companyId: string;
 }>;
 
 export type GetAllUserSuccess = UserProfile[]
