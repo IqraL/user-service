@@ -1,8 +1,11 @@
-import { CompanyDetails } from "@midnight-moon/shared-types";
+import {
+  CompanyDetails,
+  AddCompanyDetailsRequest,
+  SearchCompanyDetailsRequest,
+} from "@midnight-moon/shared-types";
 import express from "express";
 import { responseWrapper } from "../../routes/helpers/utils";
 import { addCompany, searchCompanies } from "./logic";
-import { AddCompanyDetailsRequest, SearchCompanyDetailsRequest } from "./types";
 
 const companiesRouter = express.Router();
 

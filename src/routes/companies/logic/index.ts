@@ -1,12 +1,14 @@
 import {
   createDbItemWrapper,
   searchDbItemWrapper,
+  
 } from "@midnight-moon/mongo-db-layer";
-import { CompanyDetails, ItemTypes } from "@midnight-moon/shared-types";
 import {
+  CompanyDetails,
+  ItemTypes,
   AddCompanyDetailsRequest,
   SearchCompanyDetailsRequest,
-} from "../types";
+} from "@midnight-moon/shared-types";
 
 export const addCompany =
   (req: AddCompanyDetailsRequest) => async (): Promise<CompanyDetails> => {
