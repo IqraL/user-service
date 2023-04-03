@@ -6,7 +6,6 @@ import {
 } from "../../../getGoogleTokens";
 import { getGoogleUsersDetails } from "../../../getGoogleUsersDetails";
 
-import { AuthRequest, AuthResponseSuccess } from "../types";
 import { isGoogleEmailVerified } from "../../helpers/auth";
 import {
   ItemTypes,
@@ -14,6 +13,8 @@ import {
   AccountProviders,
   UserData,
   CompanyDetails,
+  AuthRequest,
+  AuthResponseSuccess,
 } from "@midnight-moon/shared-types";
 import { AuthJourney } from "../../helpers/types";
 import {

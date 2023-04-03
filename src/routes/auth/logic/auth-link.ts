@@ -1,5 +1,5 @@
 import { google } from "googleapis";
-import { AuthLinkResponseSuccess } from "../types";
+import { AuthLinkResponseSuccess } from "@midnight-moon/shared-types";
 
 export const generateAuthenticationLink =
   () => async (): Promise<AuthLinkResponseSuccess> => {

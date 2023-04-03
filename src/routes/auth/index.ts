@@ -6,7 +6,7 @@ import {
   AuthResponseSuccess,
   ValidJwtRequest,
   ValidJwtSuccess,
-} from "./types";
+} from "@midnight-moon/shared-types";
 
 import { login } from "./logic/login";
 import { generateAuthenticationLink } from "./logic/auth-link";
