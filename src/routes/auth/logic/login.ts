@@ -13,6 +13,7 @@ import {
   UserProfile,
   AccountProviders,
   UserData,
+  CompanyDetails,
 } from "@midnight-moon/shared-types";
 import { AuthJourney } from "../../helpers/types";
 import {
@@ -21,10 +22,10 @@ import {
   updateDbItemWrapper,
 } from "@midnight-moon/mongo-db-layer";
 
-export const loginOrSignUp =
+export const login =
   (req: AuthRequest) => async (): Promise<AuthResponseSuccess> => {
     try {
-      const { code, company } = req.body;
+      const { code } = req.body;
 
       const tokens = await getGoogleTokens({
         authorizationCode: code,
@@ -49,6 +50,21 @@ export const loginOrSignUp =
         itemType: ItemTypes.User,
       });
 
+      const companyDetails = await getOneDbItemWrapper<CompanyDetails>({
+        searchProperties: {
+          users: [userData.email],
+        },
+        itemType: ItemTypes.User,
+      });
+
+      const firstLogin = companyDetails && !existingUser;
+
+      if (!firstLogin && !existingUser) {
+        throw new Error(
+          "You need to sign up you're company to use the app, OR If you're company is already using us ask an admin to add you to the list of users"
+        );
+      }
+      
       if (existingUser) {
         const internalJWT = genInternalJWT({
           email: existingUser.email,
@@ -74,11 +90,16 @@ export const loginOrSignUp =
         );
       }
 
-      if (!existingUser && isGoogleAllTokensResponse(tokens) && company) {
+      if (!existingUser && isGoogleAllTokensResponse(tokens) && firstLogin) {
+        const isAdmin = companyDetails.admins.find(
+          (admin) => admin === userData.email
+        );
+
         const allUserData: UserProfile = {
           ...userData,
-          company,
-          userGroups:[],
+          companyId: companyDetails.companyId,
+          isAdmin: !!isAdmin,
+          userGroups: [],
           itemType: ItemTypes.User,
         };
 

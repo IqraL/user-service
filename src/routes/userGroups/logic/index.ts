@@ -29,7 +29,7 @@ export const getUserGroupById =
 export const getAllUserGroups =
   (req: GetAllUserGroupsRequest) => async (): Promise<UserGroup[]> => {
     return await getAllDbItemsWrapper<UserGroup>({
-      searchProperties: { company: req.body.company },
+      searchProperties: { companyId: req.body.companyId },
       itemType: ItemTypes.UserGroup,
     });
   };

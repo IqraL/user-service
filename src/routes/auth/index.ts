@@ -8,7 +8,7 @@ import {
   ValidJwtSuccess,
 } from "./types";
 
-import { loginOrSignUp } from "./logic/auth";
+import { login } from "./logic/login";
 import { generateAuthenticationLink } from "./logic/auth-link";
 import { responseWrapper } from "../helpers/utils";
 import { validateToken } from "./logic/valid-token";
@@ -27,7 +27,7 @@ authenticationRouter.post(
 authenticationRouter.post(
   "/login",
   async (req: AuthRequest, res) =>
-    await responseWrapper<AuthResponseSuccess>(loginOrSignUp(req), res)
+    await responseWrapper<AuthResponseSuccess>(login(req), res)
 );
 
 
