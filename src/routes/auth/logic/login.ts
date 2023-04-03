@@ -15,8 +15,8 @@ import {
   CompanyDetails,
   AuthRequest,
   AuthResponseSuccess,
+  AuthJourney,
 } from "@midnight-moon/shared-types";
-import { AuthJourney } from "../../helpers/types";
 import {
   createDbItemWrapper,
   getOneDbItemWrapper,

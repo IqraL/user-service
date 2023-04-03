@@ -1,6 +1,11 @@
 import { getAllDbItemsWrapper, getOneDbItemWrapper } from "@midnight-moon/mongo-db-layer";
-import { ItemTypes, UserData, UserProfile } from "@midnight-moon/shared-types";
-import { GetAllUserRequest, GetUserByIdRequest } from "../types";
+import {
+  ItemTypes,
+  UserData,
+  UserProfile,
+  GetAllUserRequest,
+  GetUserByIdRequest,
+} from "@midnight-moon/shared-types";
 
 const userDataToProfile = (user: UserData): UserProfile => ({
   email: user.email,

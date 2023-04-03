@@ -1,7 +1,10 @@
 import { GoogleAllTokensResponse } from "../../getGoogleTokens/types";
 import { GoogleUserData } from "../../getGoogleUsersDetails/types";
-import { AccountProviders, UserProfile } from "@midnight-moon/shared-types";
-import { ExpressPostRequest } from "../helpers/types";
+import {
+  AccountProviders,
+  UserProfile,
+  ExpressPostRequest,
+} from "@midnight-moon/shared-types";
 
 type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>;
 
@@ -15,17 +18,3 @@ export type UserDataUpdateTokens = { email: string } & Optional<
 
 export type GoogleUser = GoogleUserData &
   GoogleAllTokensResponse & { accountProvider: AccountProviders.google };
-
-// --------------------------------------------------------------
-
-export type GetUserByIdRequest = ExpressPostRequest<{
-  email: string;
-}>;
-
-export type GetUserByIdSuccess = UserProfile;
-
-export type GetAllUserRequest = ExpressPostRequest<{
-  companyId: string;
-}>;
-
-export type GetAllUserSuccess = UserProfile[]

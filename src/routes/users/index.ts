@@ -1,7 +1,7 @@
 import express from "express";
 import { responseWrapper } from "../helpers/utils";
 import { getAllUsers, getUserById } from "./logic";
-import { GetAllUserRequest, GetAllUserSuccess, GetUserByIdRequest, GetUserByIdSuccess } from "./types";
+import { GetAllUserRequest, GetAllUserSuccess, GetUserByIdRequest, GetUserByIdSuccess } from "@midnight-moon/shared-types";
 
 const usersRouter = express.Router();
 
