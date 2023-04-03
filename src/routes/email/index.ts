@@ -1,7 +1,7 @@
 import express from "express";
 import { responseWrapper } from "../../routes/helpers/utils";
 import { sendValidationEmail, validateEmail } from "./logic";
-import { SendValidationEmailRequest, ValidationEmailRequest } from "./types";
+import { SendValidationEmailRequest, ValidationEmailRequest } from "@midnight-moon/shared-types";
 
 const emailsRouter = express.Router();
 

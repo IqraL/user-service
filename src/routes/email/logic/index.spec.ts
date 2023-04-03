@@ -1,8 +1,11 @@
 import mongoDbLayer from "@midnight-moon/mongo-db-layer";
-import { SendValidationEmailRequest, ValidationEmailRequest } from "../types";
 import { sendValidationEmail, validateEmail } from "./index";
 import * as configModule from "../config";
-import { ItemTypes } from "@midnight-moon/shared-types";
+import {
+  ItemTypes,
+  SendValidationEmailRequest,
+  ValidationEmailRequest,
+} from "@midnight-moon/shared-types";
 import uuidModule from "uuid";
 
 jest.mock("uuid", () => ({

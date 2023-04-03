@@ -1,4 +1,3 @@
-import { SendValidationEmailRequest, ValidationEmailRequest } from "../types";
 import { v4 as uuidv4 } from "uuid";
 import { mg } from "../config";
 import {
@@ -6,7 +5,12 @@ import {
   getOneDbItemWrapper,
   updateDbItemWrapper,
 } from "@midnight-moon/mongo-db-layer";
-import { EmailValidation, ItemTypes } from "@midnight-moon/shared-types";
+import {
+  EmailValidation,
+  ItemTypes,
+  SendValidationEmailRequest,
+  ValidationEmailRequest,
+} from "@midnight-moon/shared-types";
 
 export const sendValidationEmail =
   (req: SendValidationEmailRequest) => async () => {
