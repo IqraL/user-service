@@ -32,7 +32,7 @@ export const responseWrapper = async <T>(
     res.send(
       errorResponse({
         //@ts-ignore
-        errorMsg: error.msg,
+        errorMsg: error.message,
         //@ts-ignore
         stack: error.stack,
       })

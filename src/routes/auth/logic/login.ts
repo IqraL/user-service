@@ -55,7 +55,7 @@ export const login =
         searchProperties: {
           users: [userData.email],
         },
-        itemType: ItemTypes.User,
+        itemType: ItemTypes.CompanyDetails,
       });
 
       const firstLogin = companyDetails && !existingUser;
@@ -65,7 +65,7 @@ export const login =
           "You need to sign up you're company to use the app, OR If you're company is already using us ask an admin to add you to the list of users"
         );
       }
-      
+
       if (existingUser) {
         const internalJWT = genInternalJWT({
           email: existingUser.email,
