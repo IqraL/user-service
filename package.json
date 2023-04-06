@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@faker-js/faker": "^7.6.0",
     "@midnight-moon/mongo-db-layer": "file:../npm-packages/mongo-db-layer",
     "@midnight-moon/shared-types": "file:../npm-packages/shared-types",
     "@types/node": "^18.14.6",
