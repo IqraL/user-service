@@ -3,6 +3,7 @@ import mongoDbLayer, {
 } from "@midnight-moon/mongo-db-layer";
 import {
   CompanyDetails,
+  IsUserRegisteredRequest,
   ItemTypes,
   mockCompanyDetails,
 } from "@midnight-moon/shared-types";
@@ -38,8 +39,8 @@ describe("isUserRegistered", () => {
     const result = await isUserRegistered({
       body: {
         email: user,
-      },
-    })();
+      } 
+    } as IsUserRegisteredRequest)();
 
     expect(result).toBe(true);
   });
@@ -55,7 +56,7 @@ describe("isUserRegistered", () => {
       body: {
         email: user,
       },
-    })();
+    } as IsUserRegisteredRequest)();
 
     expect(result).toBe(true);
   });
@@ -71,7 +72,7 @@ describe("isUserRegistered", () => {
       body: {
         email: user,
       },
-    })();
+    } as IsUserRegisteredRequest)();
 
     expect(result).toBe(false);
   });
@@ -87,7 +88,7 @@ describe("isUserRegistered", () => {
       body: {
         email,
       },
-    })();
+    } as IsUserRegisteredRequest)();
 
     expect(result).toBe(true);
   });
@@ -103,7 +104,7 @@ describe("isUserRegistered", () => {
       body: {
         email,
       },
-    })();
+    } as IsUserRegisteredRequest)();
 
     expect(result).toBe(true);
   });
@@ -117,7 +118,7 @@ describe("isUserRegistered", () => {
       body: {
         email,
       },
-    })();
+    } as IsUserRegisteredRequest)();
 
     expect(result).toBe(false);
   });

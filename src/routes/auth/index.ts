@@ -4,6 +4,7 @@ import {
   AuthLinkResponseSuccess,
   AuthRequest,
   AuthResponseSuccess,
+  IsUserRegisteredRequest,
   ValidJwtRequest,
   ValidJwtSuccess,
 } from "@midnight-moon/shared-types";
@@ -12,6 +13,7 @@ import { login } from "./logic/login";
 import { generateAuthenticationLink } from "./logic/auth-link";
 import { responseWrapper } from "../helpers/utils";
 import { validateToken } from "./logic/valid-token";
+import { isUserRegistered } from "./logic/is-user-registered";
 
 const authenticationRouter = express.Router();
 
@@ -30,6 +32,11 @@ authenticationRouter.post(
     await responseWrapper<AuthResponseSuccess>(login(req), res)
 );
 
+authenticationRouter.post(
+  "/is-user-registered",
+  async (req: IsUserRegisteredRequest, res) =>
+    await responseWrapper<boolean>(isUserRegistered(req), res)
+);
 
 authenticationRouter.post(
   "/valid-token",

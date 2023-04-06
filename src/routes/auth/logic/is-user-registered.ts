@@ -1,11 +1,11 @@
 import {
   CompanyDetails,
+  IsUserRegisteredRequest,
   ItemTypes
 } from "@midnight-moon/shared-types";
 import { searchDbItemWrapper } from "@midnight-moon/mongo-db-layer";
 
-
-export const isUserRegistered = (req: { body: { email: string; }; }) => async (): Promise<boolean> => {
+export const isUserRegistered = (req: IsUserRegisteredRequest ) => async (): Promise<boolean> => {
   const { email } = req.body;
   const companyDetails = await searchDbItemWrapper<CompanyDetails>({
     searchPropertiesAndValues: [
