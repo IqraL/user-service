@@ -39,7 +39,7 @@ describe("isUserRegistered", () => {
     const result = await isUserRegistered({
       body: {
         email: user,
-      } 
+      },
     } as IsUserRegisteredRequest)();
 
     expect(result).toBe(true);
@@ -68,13 +68,13 @@ describe("isUserRegistered", () => {
       item: { ...companyDetails },
     });
 
-    const result = await isUserRegistered({
+    const fn = await isUserRegistered({
       body: {
         email: user,
       },
-    } as IsUserRegisteredRequest)();
+    } as IsUserRegisteredRequest);
 
-    expect(result).toBe(false);
+    await expect(fn()).rejects.toThrow();
   });
 
   it("should be a valid user", async () => {
@@ -114,12 +114,12 @@ describe("isUserRegistered", () => {
 
     jest.spyOn(mongoDbLayer, "searchDbItemWrapper").mockResolvedValue([]);
 
-    const result = await isUserRegistered({
+    const fn = await isUserRegistered({
       body: {
         email,
       },
-    } as IsUserRegisteredRequest)();
+    } as IsUserRegisteredRequest);
 
-    expect(result).toBe(false);
+    await expect(fn()).rejects.toThrow();
   });
 });

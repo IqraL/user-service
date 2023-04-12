@@ -19,9 +19,16 @@ export const isUserRegistered = (req: IsUserRegisteredRequest ) => async (): Pro
     itemType: ItemTypes.CompanyDetails,
   });
 
+  let isUserRegistered = false;
+
   if (companyDetails.length) {
-    return true;
-  } else {
-    return false;
+    isUserRegistered=  true;
+  } 
+
+  if(!isUserRegistered){
+    throw new Error('This user is not registered')
   }
+
+  return isUserRegistered;
+
 };
