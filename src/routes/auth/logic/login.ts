@@ -51,14 +51,20 @@ export const login =
         itemType: ItemTypes.User,
       });
 
+      console.log("email:", userData.email);
+
       const companyDetails = await getOneDbItemWrapper<CompanyDetails>({
         searchProperties: {
           users: [userData.email],
         },
         itemType: ItemTypes.CompanyDetails,
       });
+      //iqra@hopin3.com
+      console.log("companyDetails:", companyDetails);
 
       const firstLogin = companyDetails && !existingUser;
+
+      console.log("firstLogin:", firstLogin, existingUser);
 
       if (!firstLogin && !existingUser) {
         throw new Error(
